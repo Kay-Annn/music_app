@@ -1,0 +1,29 @@
+.App-header{
+    background-color: black;
+}
+
+.App-header {
+    background-color: #d0abd1;
+    min-height: 15vh;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+    font-size: calc(10px + 2vmin);
+    color: rgb(255, 255, 255);
+    padding: 2rem;
+  }
+
+  .Header-logo{
+    height: 15vmin;
+  }
+
+  a{
+    text-decoration: none;
+  }
+
+  .signUpLogin{
+    display: flex;
+    flex-direction: row;
+    margin-left: 2rem;
+}
