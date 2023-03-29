@@ -1,9 +1,8 @@
 import mongoose from 'mongoose';
+import * as dotenv from 'dotenv'
+dotenv.config()
 
-const connectionString =
-  process.env.MONGODB_URI || 'mongodb://127.0.0.1:27017/musicplayer_db'
-
-mongoose.connect(connectionString, {
+mongoose.connect(process.env.DB_CONNECTIONSTRING, {
   useNewUrlParser: true,
   useUnifiedTopology: true,
 })

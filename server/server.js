@@ -8,6 +8,13 @@ const app = express()
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
 
+app.get("/", (req,res) =>{
+return res.json("Hi Kay!")
+})
+
+
+
+
 app.use('/api', routes)
 
 if (process.env.NODE_ENV === 'production') {

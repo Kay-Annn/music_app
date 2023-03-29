@@ -4,19 +4,42 @@ import { FaFacebook } from 'react-icons/fa';
 import { app } from '../config/FirebaseConfig';
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { useNavigate } from 'react-router-dom';
+import {useState,useEffect} from 'react';
 
 
-const Login = () => {
+const Login = ({setAuth}) => {
   const firebaseAuth = getAuth(app);
   const provider = new GoogleAuthProvider();
   const navigate = useNavigate();
 
   const googleLogin = async () => {
     await signInWithPopup(firebaseAuth, provider).then((UserCredential) => {
-      
+      if (UserCredential){
+        setAuth(true);
+        window.localStorage.setItem("auth", "true");
+        firebaseAuth.onAuthStateChanged((UserCredentials) => {
+         if(UserCredential){
+          UserCredentials.getIdToken().then((token) => {
+            console.log(token);
+          })
+          navigate("/", {replace : true})
+         }else{
+          setAuth(false);
+          navigate("/login")
+         }
+        })
+      }
     })
   
   }
+
+
+  useEffect(() => {
+  if (window.localStorage.getItem("auth") === "true" ){
+    navigate("/", {replace : true})
+  }
+  }, [])
+  
 
   return (
     <div className='relative w-screen h-screen'>
