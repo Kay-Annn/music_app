@@ -1,5 +1,20 @@
 import User from '../models/user.js'
 
+export const createUser = async (req, res) => {
+  try {
+    const newUser = await User.create({
+      _id:req.body._id,
+      username: req.body.username,
+      email: req.body.email,
+    })
+
+    res.status(200).json({ msg: 'user created', newUser })
+  } catch (error) {
+    console.log(error)
+    res.status(500).json({ msg: error })
+  }
+}
+
 export const getAllUsers = async (req, res) => {
   try {
     const usersData = await User.find({})
@@ -26,20 +41,6 @@ export const getUser = async (req, res) => {
   }
 }
 
-export const createUser = async (req, res) => {
-  try {
-    const newUser = await User.create({
-      _id:req.body._id,
-      username: req.body.username,
-      email: req.body.email,
-    })
-
-    res.status(200).json({ msg: 'user created', newUser })
-  } catch (error) {
-    console.log(error)
-    res.status(500).json({ msg: error })
-  }
-}
 
 export const updateUser = async (req, res) => {
   try {
